@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Handler</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-_o70HeB5M_AX_x1AvcyBY3H0sOwQiCo&callback=initMap&loading=async&libraries=marker&region=CL&language=es"
+        async defer></script>
+    <script src="../dist/google-maps-handler.min.js" defer></script>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #mapContainer {
+            box-sizing: initial;
+            width: 80%;
+            height: 80%;
+        }
+
+        #mapContainer img {
+            max-width: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mapContainer"></div>
+    <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("mapContainer"), {
+                zoom: 20,
+                center: { lat: -36.787019, lng: -73.090661 },
+                mapId: 'GoogleMapId'
+            });
+
+            const handler = new GoogleMapsHandler(map);
+
+            handler.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "Marker 1" });
+
+            setTimeout(() => {
+                handler.stopMarkers();
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>

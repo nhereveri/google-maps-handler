@@ -5,7 +5,7 @@ class MarkerManager {
     }
 
     addMarker(position, options = {}) {
-        const marker = new google.maps.Marker({
+        const marker = new google.maps.marker.AdvancedMarkerElement({
             position,
             map: this.map,
             ...options,
