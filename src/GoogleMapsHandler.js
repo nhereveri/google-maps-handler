@@ -16,11 +16,11 @@ export default class GoogleMapsHandler {
         return this.markerManager.addMarker(position, options);
     }
 
-    playMarkers() {
+    showMarkers() {
         this.markerManager.showMarkers();
     }
 
-    stopMarkers() {
+    hideMarkers() {
         this.markerManager.hideMarkers();
     }
 
