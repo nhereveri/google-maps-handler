@@ -1,0 +1,24 @@
+{
+    "name": "google-maps-handler",
+    "version": "1.0.0",
+    "description": "Librería para agrupar marcadores y rutas en Google Maps JS API.",
+    "main": "dist/google-maps-handler.js",
+    "module": "dist/google-maps-handler.min.js",
+    "scripts": {
+        "build": "rollup --config"
+    },
+    "keywords": [
+        "google-maps",
+        "markers",
+        "routes",
+        "javascript"
+    ],
+    "author": "Nelson Hereveri",
+    "license": "MIT",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.0",
+        "@rollup/plugin-node-resolve": "^16.0.0",
+        "@rollup/plugin-terser": "^0.4.4",
+        "rollup": "^2.79.2"
+    }
+}
