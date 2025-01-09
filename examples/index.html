@@ -34,34 +34,41 @@
             justify-content: center;
         }
 
-        #mapContainer {
+        .googleMapContainer {
             box-sizing: initial;
             width: 80%;
             height: 80%;
         }
 
-        #mapContainer img {
+        .googleMapContainer img {
             max-width: none;
         }
     </style>
 </head>
 
 <body>
-    <div id="mapContainer"></div>
+    <div id="mapContainer" class="googleMapContainer"></div>
     <script>
         function initMap() {
             const map = new google.maps.Map(document.getElementById("mapContainer"), {
                 zoom: 20,
                 center: { lat: -36.787019, lng: -73.090661 },
-                mapId: 'GoogleMapId'
+                mapId: 'MAP_ID',
+                renderingType: google.maps.RenderingType.VECTOR,
+                mapTypeControl: false,
             });
 
-            const handler = new GoogleMapsHandler(map);
+            const handler1 = new GoogleMapsHandler(map);
 
-            handler.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "Marker 1" });
+            handler1.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "Marker 1" });
+
+            const handler2 = new GoogleMapsHandler(map);
+
+            handler2.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "Marker 2" });
+            handler2.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Marker 3" });
 
             setTimeout(() => {
-                handler.hideMarkers();
+                handler2.hideMarkers();
             }, 5000);
         }
     </script>

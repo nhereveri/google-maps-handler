@@ -1,5 +1,6 @@
 import MarkerManager from "./MarkerManager";
 import RouteManager from "./RouteManager";
+import IconManager from "./IconManager";
 
 export default class GoogleMapsHandler {
     constructor(map) {
@@ -9,11 +10,27 @@ export default class GoogleMapsHandler {
         this.map = map;
         this.markerManager = new MarkerManager(map);
         this.routeManager = new RouteManager(map);
+        this.iconManager = new IconManager();
     }
 
-    // Métodos públicos
     addMarker(position, options) {
-        return this.markerManager.addMarker(position, options);
+        const { iconId, ...markerOptions } = options;
+
+        if (iconId) {
+            const markerContent = document.createElement("div");
+            markerContent.innerHTML = iconId
+                ? this.iconManager.getIcon(iconId)
+                : options.content || "";
+            markerOptions.content = markerContent;
+        }
+
+        const finalMarkerOptions = {
+            position,
+            map: this.map,
+            ...markerOptions
+        };
+
+        return this.markerManager.addMarker(position, finalMarkerOptions);
     }
 
     showMarkers() {
@@ -34,5 +51,9 @@ export default class GoogleMapsHandler {
 
     hideRoutes() {
         this.routeManager.hideRoutes();
+    }
+
+    getIconManager() {
+        return this.iconManager;
     }
 }
