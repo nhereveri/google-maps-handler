@@ -3,7 +3,7 @@ import RouteManager from "./RouteManager";
 import IconManager from "./IconManager";
 
 export default class GoogleMapsHandler {
-    constructor(map) {
+    constructor(map, options = {}) {
         if (!map) {
             throw new Error("A Google Maps instance must be provided.");
         }
@@ -11,6 +11,10 @@ export default class GoogleMapsHandler {
         this.markerManager = new MarkerManager(map);
         this.routeManager = new RouteManager(map);
         this.iconManager = new IconManager();
+        if (options.useDefaultIcons) {
+            console.log('default icons ON');
+            IconManager.registerDefaultIcons(this.iconManager);
+        }
     }
 
     addMarker(position, options) {

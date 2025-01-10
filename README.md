@@ -1,4 +1,4 @@
-# Google Maps Handler
+# Google Maps Handler JS Library
 
 Google Maps Handler is a JavaScript library that simplifies the management of markers and routes on Google Maps. It allows you to group, hide, show, and customize markers with ease.
 
@@ -33,7 +33,7 @@ npm run build
 <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&loading=async&libraries=marker&region=CL&language=es" async defer></script>
 ```
 
-- Add this JS library.
+- Add Google Maps Handler JS Library script file.
 ```html
 <script src="dist/google-maps-handler.min.js" defer></script>
 ```

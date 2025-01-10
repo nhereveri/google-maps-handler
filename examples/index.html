@@ -36,7 +36,7 @@
 
         .googleMapContainer {
             box-sizing: initial;
-            width: 80%;
+            width: 40%;
             height: 80%;
         }
 
@@ -47,25 +47,38 @@
 </head>
 
 <body>
-    <div id="mapContainer" class="googleMapContainer"></div>
+    <div id="mapContainer1" class="googleMapContainer"></div>
+    <div id="mapContainer2" class="googleMapContainer"></div>
     <script>
         function initMap() {
-            const map = new google.maps.Map(document.getElementById("mapContainer"), {
-                zoom: 20,
+            const vectorMap = new google.maps.Map(document.getElementById("mapContainer1"), {
+                zoom: 17,
                 center: { lat: -36.787019, lng: -73.090661 },
                 mapId: 'MAP_ID',
                 renderingType: google.maps.RenderingType.VECTOR,
-                mapTypeControl: false,
+                disableDefaultUI: true,
+            });
+            const rasterMap = new google.maps.Map(document.getElementById("mapContainer2"), {
+                zoom: 17,
+                center: { lat: -36.787019, lng: -73.090661 },
+                mapId: 'MAP_ID',
+                renderingType: google.maps.RenderingType.VECTOR,
+                disableDefaultUI: true,
             });
 
-            const handler1 = new GoogleMapsHandler(map);
+            const handler1 = new GoogleMapsHandler(vectorMap);
 
             handler1.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "Marker 1" });
 
-            const handler2 = new GoogleMapsHandler(map);
+            const handler2 = new GoogleMapsHandler(vectorMap);
 
             handler2.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "Marker 2" });
             handler2.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Marker 3" });
+
+            const handler3 = new GoogleMapsHandler(rasterMap, { useDefaultIcons: true });
+
+            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "Marker 2", iconId: "front-loader" });
+            handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Marker 3", iconId: "dump-truck" });
 
             setTimeout(() => {
                 handler2.hideMarkers();
