@@ -10,11 +10,32 @@ class IconManager {
         this.icons.set(id, svg);
     }
 
-    getIcon(id) {
+    getIcon(id, scale = 1) {
         if (!this.icons.has(id)) {
             throw new Error(`Icon with ID "${id}" does not exist.`);
         }
-        return this.icons.get(id);
+        const svgContent = this.icons.get(id);
+
+        if (!svgContent) {
+            console.warn(`Icon '${id}' not found.`);
+            return null;
+        }
+
+        const parser = new DOMParser();
+        const svgDocument = parser.parseFromString(svgContent, "image/svg+xml");
+        const svgElement = svgDocument.documentElement;
+
+        const originalWidth = svgElement.getAttribute("width") || 32;
+        const originalHeight = svgElement.getAttribute("height") || 32;
+
+        const newWidth = parseFloat(originalWidth) * scale;
+        const newHeight = parseFloat(originalHeight) * scale;
+
+        svgElement.setAttribute("width", newWidth);
+        svgElement.setAttribute("height", newHeight);
+
+        const serializer = new XMLSerializer();
+        return serializer.serializeToString(svgElement);
     }
 
     static registerDefaultIcons(iconManager) {

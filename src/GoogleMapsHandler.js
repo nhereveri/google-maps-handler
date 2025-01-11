@@ -4,24 +4,26 @@ import IconManager from "./IconManager";
 
 export default class GoogleMapsHandler {
     constructor(map, options = {}) {
-        if (!map) {
+        if (window.google && google.maps && map instanceof google.maps.Map) {
+            this.map = map;
+            this.markerManager = new MarkerManager(map);
+            this.routeManager = new RouteManager(map);
+            this.iconManager = new IconManager();
+            if (options.useDefaultIcons) {
+                IconManager.registerDefaultIcons(this.iconManager);
+            }
+        } else {
             throw new Error("A Google Maps instance must be provided.");
-        }
-        this.map = map;
-        this.markerManager = new MarkerManager(map);
-        this.routeManager = new RouteManager(map);
-        this.iconManager = new IconManager();
-        if (options.useDefaultIcons) {
-            IconManager.registerDefaultIcons(this.iconManager);
         }
     }
 
     addMarker(position, options) {
-        const { iconId, ...markerOptions } = options;
+        const { iconId, scale, ...markerOptions } = options;
 
         if (iconId) {
             const markerContent = document.createElement("div");
-            markerContent.innerHTML = iconId ? this.iconManager.getIcon(iconId) : options.content || "";
+            markerContent.innerHTML = iconId ? this.iconManager.getIcon(iconId, scale) : options.content || "";
+            markerContent.style.marginBottom = '-50%'; // set anchor in the center of the content
             markerOptions.content = markerContent;
         }
 
