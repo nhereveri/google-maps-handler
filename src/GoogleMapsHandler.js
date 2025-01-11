@@ -12,7 +12,6 @@ export default class GoogleMapsHandler {
         this.routeManager = new RouteManager(map);
         this.iconManager = new IconManager();
         if (options.useDefaultIcons) {
-            console.log('default icons ON');
             IconManager.registerDefaultIcons(this.iconManager);
         }
     }
@@ -22,9 +21,7 @@ export default class GoogleMapsHandler {
 
         if (iconId) {
             const markerContent = document.createElement("div");
-            markerContent.innerHTML = iconId
-                ? this.iconManager.getIcon(iconId)
-                : options.content || "";
+            markerContent.innerHTML = iconId ? this.iconManager.getIcon(iconId) : options.content || "";
             markerOptions.content = markerContent;
         }
 
