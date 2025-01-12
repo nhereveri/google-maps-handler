@@ -22,6 +22,12 @@ class MarkerManager {
         this.markers.forEach(marker => marker.setMap(null));
     }
 
+    setAllLabels(state) {
+        this.markers.forEach((marker) => {
+            marker.toggleLabel(state);
+        });
+    }
+
     clearMarkers() {
         this.hideMarkers();
         this.markers = [];

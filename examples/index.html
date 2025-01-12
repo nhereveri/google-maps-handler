@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Maps Handler</title>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&loading=async&libraries=marker&region=CL&language=es"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEIYUolc0fsDGDBbgtqq6xfZASsFennZg&callback=initMap&loading=async&libraries=marker&region=CL&language=es"
         async defer></script>
-    <script src="../dist/google-maps-handler.min.js" defer></script>
+    <script src="../dist/google-maps-handler.js" defer></script>
     <style>
         html {
             box-sizing: border-box;
@@ -43,6 +43,32 @@
         .googleMapContainer img {
             max-width: none;
         }
+
+        .marker-label {
+            display: inline-block;
+            background-color: #BBE4E9; /* Fondo */
+            color: #5585b5; /* Color del texto */
+            max-width: 64px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 8px; /* Espaciado interno */
+            border-radius: 1px; /* Bordes redondeados */
+            border: 1px solid #53A8B6; /* Color del borde */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+            /*white-space: nowrap; /* Evitar salto de línea */
+            /*transform: translate(-50%, calc(-100% + 16px)); /* Centra el rectángulo y ajusta verticalmente */
+        }
+
+        .marker-label-text {
+            z-index: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            white-space: normal;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 
@@ -54,14 +80,14 @@
             const vectorMap = new google.maps.Map(document.getElementById("mapContainer1"), {
                 zoom: 17,
                 center: { lat: -36.787019, lng: -73.090661 },
-                mapId: 'MAP_ID',
+                mapId: '22619e6b7481a213',
                 renderingType: google.maps.RenderingType.VECTOR,
                 disableDefaultUI: true,
             });
             const rasterMap = new google.maps.Map(document.getElementById("mapContainer2"), {
                 zoom: 17,
                 center: { lat: -36.787019, lng: -73.090661 },
-                mapId: 'MAP_ID',
+                mapId: '57765189ace8c296',
                 renderingType: google.maps.RenderingType.VECTOR,
                 disableDefaultUI: true,
             });
@@ -77,12 +103,15 @@
 
             const handler3 = new GoogleMapsHandler(rasterMap, { useDefaultIcons: true });
 
-            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "Marker 2", iconId: "front-loader" });
-            handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Marker 3", iconId: "dump-truck" });
+            handler3.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "JZZZ84", iconId: "front-loader", scale: 1.618  });
+            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "JZZZ84", iconId: "front-loader", scale: 2.618 });
+            const markerWithTag = handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Gummi bears chupa chups lemon drops toffee donut", iconId: "front-loader" });
+            handler3.setAllLabels(true);
 
             setTimeout(() => {
-                handler2.hideMarkers();
-            }, 5000);
+                handler3.setAllLabels(false);
+                markerWithTag.toggleLabel(true);
+            }, 2000);
         }
     </script>
 </body>

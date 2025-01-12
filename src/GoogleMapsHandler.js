@@ -1,9 +1,11 @@
 import MarkerManager from "./MarkerManager";
 import RouteManager from "./RouteManager";
 import IconManager from "./IconManager";
+import { extendAdvancedMarkerElement } from "./marker-extensions.js";
 
 export default class GoogleMapsHandler {
     constructor(map, options = {}) {
+        extendAdvancedMarkerElement();
         if (window.google && google.maps && map instanceof google.maps.Map) {
             this.map = map;
             this.markerManager = new MarkerManager(map);
@@ -23,7 +25,10 @@ export default class GoogleMapsHandler {
         if (iconId) {
             const markerContent = document.createElement("div");
             markerContent.innerHTML = iconId ? this.iconManager.getIcon(iconId, scale) : options.content || "";
-            markerContent.style.marginBottom = '-50%'; // set anchor in the center of the content
+            markerContent.style.display = 'flex';
+            markerContent.style.alignItems = 'center';
+            markerContent.style.justifyContent = 'center';
+            markerContent.style.flexDirection = 'column';
             markerOptions.content = markerContent;
         }
 
@@ -34,6 +39,10 @@ export default class GoogleMapsHandler {
         };
 
         return this.markerManager.addMarker(position, finalMarkerOptions);
+    }
+
+    setAllLabels(state) {
+        this.markerManager.setAllLabels(state);
     }
 
     showMarkers() {
