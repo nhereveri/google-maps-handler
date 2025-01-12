@@ -12,7 +12,6 @@ export function extendAdvancedMarkerElement(iconManager) {
 
                 this.labelElement = label;
                 this.content.appendChild(label);
-                console.log(this.content)
             }
 
             this.labelElement.style.display = state ? "block" : "none";
