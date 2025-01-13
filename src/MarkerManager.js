@@ -1,17 +1,33 @@
+import { extendAdvancedMarkerElement } from "./marker-extensions.js";
+
 class MarkerManager {
     constructor(map) {
         this.map = map;
-        this.markers = [];
+        this.markers = new Map();
+        extendAdvancedMarkerElement();
     }
 
     addMarker(position, options = {}) {
+        const { uuid, ...markerOptions } = options;
+        let currentUUID;
+        if(!uuid) {
+            currentUUID = crypto.randomUUID();
+        } else {
+            currentUUID = uuid;
+        }
         const marker = new google.maps.marker.AdvancedMarkerElement({
             position,
             map: this.map,
-            ...options,
+            ...markerOptions,
         });
-        this.markers.push(marker);
+        this.markers.set(currentUUID, marker);
+        console.log('===');
+        console.log(this.markers);
         return marker;
+    }
+
+    getMarker(uuid) {
+        return this.markers.get(uuid);
     }
 
     showMarkers() {
@@ -30,7 +46,7 @@ class MarkerManager {
 
     clearMarkers() {
         this.hideMarkers();
-        this.markers = [];
+        this.markers = new Map();
     }
 }
 

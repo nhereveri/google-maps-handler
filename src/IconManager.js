@@ -28,8 +28,11 @@ class IconManager {
         const originalWidth = svgElement.getAttribute("width") || 32;
         const originalHeight = svgElement.getAttribute("height") || 32;
 
-        const newWidth = parseFloat(originalWidth) * scale;
-        const newHeight = parseFloat(originalHeight) * scale;
+        const phi = 1.61803399;
+        const ratio = Math.pow(phi, scale);
+
+        const newWidth = parseFloat(originalWidth) * ratio;
+        const newHeight = parseFloat(originalHeight) * ratio;
 
         svgElement.setAttribute("width", newWidth);
         svgElement.setAttribute("height", newHeight);

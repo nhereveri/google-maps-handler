@@ -103,15 +103,19 @@
 
             const handler3 = new GoogleMapsHandler(rasterMap, { useDefaultIcons: true });
 
-            handler3.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "JZZZ84", iconId: "front-loader", scale: 1.618  });
-            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "JZZZ84", iconId: "front-loader", scale: 2.618 });
-            const markerWithTag = handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Gummi bears chupa chups lemon drops toffee donut", iconId: "front-loader" });
+            
+            handler3.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "JZZZ84", iconId: "front-loader", scale: 1 });
+            handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "JZZZ85", iconId: "front-loader", scale: 0.5 });
+            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "JZZZ83", iconId: "front-loader", scale: 2 });
             handler3.setAllLabels(true);
 
             setTimeout(() => {
                 handler3.setAllLabels(false);
-                markerWithTag.toggleLabel(true);
             }, 2000);
+
+            setTimeout(() => {
+                handler3.setAllLabels(true);
+            }, 4000);
         }
     </script>
 </body>

@@ -38,7 +38,9 @@ export default class GoogleMapsHandler {
             ...markerOptions
         };
 
-        return this.markerManager.addMarker(position, finalMarkerOptions);
+        const marker = this.markerManager.addMarker(position, finalMarkerOptions);
+        marker.toggleLabel(false);
+        return marker;
     }
 
     setAllLabels(state) {
@@ -67,5 +69,9 @@ export default class GoogleMapsHandler {
 
     getIconManager() {
         return this.iconManager;
+    }
+
+    getMarkerManager() {
+        return this.markerManager;
     }
 }
