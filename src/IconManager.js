@@ -1,8 +1,20 @@
+/**
+ * Manages a collection of SVG icons.
+ */
 class IconManager {
+    /**
+     * Initializes a new instance of the IconManager class.
+     */
     constructor() {
         this.icons = new Map();
     }
 
+    /**
+     * Adds a new icon to the collection.
+     * @param {string} id - The unique identifier for the icon.
+     * @param {string} svg - The SVG content of the icon.
+     * @throws Will throw an error if an icon with the same ID already exists.
+     */
     addIcon(id, svg) {
         if (this.icons.has(id)) {
             throw new Error(`Icon with ID "${id}" already exists.`);
@@ -10,6 +22,13 @@ class IconManager {
         this.icons.set(id, svg);
     }
 
+    /**
+     * Retrieves an icon by its ID and applies a scale transformation.
+     * @param {string} id - The unique identifier for the icon.
+     * @param {number} [scale=1] - The scale factor to apply to the icon. This is a power exponent of phi.
+     * @returns {string|null} The scaled SVG content of the icon, or null if the icon does not exist.
+     * @throws Will throw an error if the icon does not exist.
+     */
     getIcon(id, scale = 1) {
         if (!this.icons.has(id)) {
             throw new Error(`Icon with ID "${id}" does not exist.`);
@@ -41,6 +60,12 @@ class IconManager {
         return serializer.serializeToString(svgElement);
     }
 
+    /**
+     * Registers default icons to the icon manager.
+     * @param {IconManager} iconManager - The instance of the IconManager to which the icons are added.
+     * 
+     * Current SVG icons are covered by a [Reshot Free License](https://www.reshot.com/license/).
+     */
     static registerDefaultIcons(iconManager) {
         iconManager.addIcon(
             'asphalt-paver',

@@ -21,8 +21,6 @@ class MarkerManager {
             ...markerOptions,
         });
         this.markers.set(currentUUID, marker);
-        console.log('===');
-        console.log(this.markers);
         return marker;
     }
 
@@ -46,6 +44,7 @@ class MarkerManager {
 
     clearMarkers() {
         this.hideMarkers();
+        this.markers.forEach(marker => google.maps.event.clearInstanceListeners(marker));
         this.markers = new Map();
     }
 }

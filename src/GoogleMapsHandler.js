@@ -1,5 +1,4 @@
 import MarkerManager from "./MarkerManager";
-import RouteManager from "./RouteManager";
 import IconManager from "./IconManager";
 import { extendAdvancedMarkerElement } from "./marker-extensions.js";
 
@@ -9,7 +8,6 @@ export default class GoogleMapsHandler {
         if (window.google && google.maps && map instanceof google.maps.Map) {
             this.map = map;
             this.markerManager = new MarkerManager(map);
-            this.routeManager = new RouteManager(map);
             this.iconManager = new IconManager();
             if (options.useDefaultIcons) {
                 IconManager.registerDefaultIcons(this.iconManager);
@@ -25,10 +23,7 @@ export default class GoogleMapsHandler {
         if (iconId) {
             const markerContent = document.createElement("div");
             markerContent.innerHTML = iconId ? this.iconManager.getIcon(iconId, scale) : options.content || "";
-            markerContent.style.display = 'flex';
-            markerContent.style.alignItems = 'center';
-            markerContent.style.justifyContent = 'center';
-            markerContent.style.flexDirection = 'column';
+            markerContent.className = 'marker-content';
             markerOptions.content = markerContent;
         }
 
@@ -55,23 +50,11 @@ export default class GoogleMapsHandler {
         this.markerManager.hideMarkers();
     }
 
-    addRoute(path, options) {
-        return this.routeManager.addRoute(path, options);
-    }
-
-    showRoutes() {
-        this.routeManager.showRoutes();
-    }
-
-    hideRoutes() {
-        this.routeManager.hideRoutes();
+    clearMarkers() {
+        this.markerManager.clearMarkers();
     }
 
     getIconManager() {
         return this.iconManager;
-    }
-
-    getMarkerManager() {
-        return this.markerManager;
     }
 }

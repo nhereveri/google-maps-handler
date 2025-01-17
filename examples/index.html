@@ -44,6 +44,14 @@
             max-width: none;
         }
 
+        .marker-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transform: translateY(50%);
+        }
+
         .marker-label {
             display: inline-block;
             background-color: #BBE4E9; /* Fondo */
@@ -65,6 +73,8 @@
             overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            box-orient: vertical;
+            line-clamp: 2;
             text-overflow: ellipsis;
             white-space: normal;
             word-wrap: break-word;
@@ -88,7 +98,6 @@
                 zoom: 17,
                 center: { lat: -36.787019, lng: -73.090661 },
                 mapId: '57765189ace8c296',
-                renderingType: google.maps.RenderingType.VECTOR,
                 disableDefaultUI: true,
             });
 
@@ -102,20 +111,21 @@
             handler2.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "Marker 3" });
 
             const handler3 = new GoogleMapsHandler(rasterMap, { useDefaultIcons: true });
-
             
-            handler3.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "JZZZ84", iconId: "front-loader", scale: 1 });
-            handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "JZZZ85", iconId: "front-loader", scale: 0.5 });
-            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "JZZZ83", iconId: "front-loader", scale: 2 });
+            handler3.addMarker({ lat: -36.787019, lng: -73.090661 }, { title: "JZ ZZ 84", iconId: "front-loader", scale: 1 });
+            handler3.addMarker({ lat: -36.787019, lng: -73.091661 }, { title: "JZ ZZ 85", iconId: "front-loader", scale: 0.5 });
+            handler3.addMarker({ lat: -36.787019, lng: -73.089661 }, { title: "JZ ZZ 83", iconId: "front-loader", scale: 2 });
             handler3.setAllLabels(true);
 
+            /*
             setTimeout(() => {
                 handler3.setAllLabels(false);
             }, 2000);
 
             setTimeout(() => {
-                handler3.setAllLabels(true);
+                handler3.clearMarkers();
             }, 4000);
+            */
         }
     </script>
 </body>
